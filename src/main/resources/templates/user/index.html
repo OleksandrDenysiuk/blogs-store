@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::body}, 'user/index')}">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+</head>
+<body>
+<th:block th:replace="~{fragments/navbar :: navbar(${user})}">
+</th:block>
+<main class="content-width row">
+    <div class="col-4">
+        <div class="text-center">
+            <h2 class="mb-3 mt-2">Username</h2>
+            <svg class="bd-placeholder-img rounded-circle mb-4" width="200" height="200"
+                 xmlns="http://www.w3.org/2000/svg"
+                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+                <title>
+                    Placeholder</title>
+                <rect width="100%" height="100%" fill="#777"></rect>
+            </svg>
+            <div class="custom-file text-left">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose image</label>
+            </div>
+        </div>
+        <ul class="list-group mt-3">
+            <li class="list-group-item disabled" aria-disabled="true">Activity</li>
+            <li class="list-group-item text-left">Shares<span class="float-right">125</span></li>
+            <li class="list-group-item text-left">Likes<span class="float-right">13</span></li>
+            <li class="list-group-item text-left">Posts<span class="float-right">37</span></li>
+            <li class="list-group-item text-left">Followers<span class="float-right">78</span></li>
+        </ul>
+    </div>
+    <div class="col mt-4">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group ">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                               placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Another input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                               placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Another input placeholder">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group ">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                               placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Another input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                               placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Another input placeholder">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary">Primary</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

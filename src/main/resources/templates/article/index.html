@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::body}, 'article/index')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Content</title>
+</head>
+<body>
+<th:block th:replace="~{fragments/navbar :: navbar(${user})}">
+</th:block>
+<div class="blog-post content-width" style="width: 45em" th:object="${article}">
+    <img class="step-image" th:src="@{'/article/' + ${article.id} + '/image'}">
+    <h2 class="blog-post-title" th:text="*{title}">Another blog post</h2>
+    <p class="blog-post-meta"><span th:text="*{getFormattedDate()}"></span> by <a th:href="'/user/' + *{author.id}" th:text="*{author.username}"></a></p>
+    <p th:text="*{content}"></p>
+</div>
+</body>
+</html>

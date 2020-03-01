@@ -16,6 +16,7 @@
         <th scope="col">Title</th>
         <th scope="col">Author</th>
         <th scope="col">Date</th>
+        <th scope="col">Likes</th>
         <th scope="col">Read</th>
         <th scope="col">Delete</th>
     </tr>
@@ -25,6 +26,7 @@
         <td th:text="*{title}"></td>
         <td><a th:href="'/user/' + *{author.id}"><span th:text="*{author.username}"></span></a></td>
         <td th:text="*{getFormattedDate()}"></td>
+        <td th:text="*{likedUsersId.size()}"></td>
         <td><a th:href="'/article/read/' + *{id}">Read</a></td>
         <td><a th:href="'/article/delete/' + *{id}">Delete</a></td>
     </tr>

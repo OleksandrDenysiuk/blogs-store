@@ -9,11 +9,11 @@ import org.springframework.validation.Validator;
 
 
 @Component
-public class UserValidator implements Validator {
+public class UserRegisterValidator implements Validator {
 
     private final UserService userService;
 
-    public UserValidator(UserService userService) {
+    public UserRegisterValidator(UserService userService) {
         this.userService = userService;
     }
 

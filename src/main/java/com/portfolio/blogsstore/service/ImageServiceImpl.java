@@ -1,7 +1,9 @@
 package com.portfolio.blogsstore.service;
 
 import com.portfolio.blogsstore.domain.Article;
+import com.portfolio.blogsstore.domain.User;
 import com.portfolio.blogsstore.repository.ArticleRepository;
+import com.portfolio.blogsstore.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +16,11 @@ import java.io.IOException;
 public class ImageServiceImpl implements ImageService {
 
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
-    public ImageServiceImpl(ArticleRepository articleRepository) {
+    public ImageServiceImpl(ArticleRepository articleRepository, UserRepository userRepository) {
         this.articleRepository = articleRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -36,6 +40,26 @@ public class ImageServiceImpl implements ImageService {
             article.setImage(byteObjects);
 
             articleRepository.save(article);
+        } catch (IOException e) {
+            log.error("Error occurred", e);
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveImageFile(User user, MultipartFile file) {
+        try {
+            Byte[] byteObjects = new Byte[file.getBytes().length];
+
+            int i = 0;
+
+            for (byte b : file.getBytes()){
+                byteObjects[i++] = b;
+            }
+
+            user.setImage(byteObjects);
+
+            userRepository.save(user);
         } catch (IOException e) {
             log.error("Error occurred", e);
             e.printStackTrace();

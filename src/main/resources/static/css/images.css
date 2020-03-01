@@ -3,3 +3,7 @@
     width: 30em;
     object-fit: cover;
 }
+
+.img-profile{
+    object-fit: cover;
+}

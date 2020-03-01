@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -36,6 +37,7 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
+    @Email
     private String email;
 
     private String address;
@@ -44,6 +46,10 @@ public class User implements UserDetails {
 
     @DBRef
     private Set<Article> articles = new HashSet<>();
+
+    private Set<User> subscribers = new HashSet<>();
+
+    private Byte[] image;
 
     public User(String username, String password){
         this.username = username;
@@ -103,5 +109,22 @@ public class User implements UserDetails {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    public int getLikesAmount(){
+        int amount = 0;
+        for(Article article : articles){
+            amount+=article.getLikedUsersId().size();
+        }
+        return amount;
+    }
+
+    public boolean isSubscriber(User user){
+        for(User subscriber : subscribers){
+            if(subscriber.equals(user)){
+                return true;
+            }
+        }
+        return false;
     }
 }

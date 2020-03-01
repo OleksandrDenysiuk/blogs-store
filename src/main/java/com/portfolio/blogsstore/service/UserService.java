@@ -9,4 +9,10 @@ public interface UserService {
     User update(User user);
 
     User findByUsername(String username);
+
+    User updateProfile(User oldUser, User form);
+
+    void subscribe(User subscriber, User user);
+
+    void unsubscribe(User subscriber, User user);
 }

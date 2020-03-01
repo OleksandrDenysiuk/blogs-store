@@ -10,9 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -35,6 +33,8 @@ public class Article {
 
     private Date date;
 
+    private Set<String> likedUsersId = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,5 +54,14 @@ public class Article {
     public String getFormattedDate(){
         DateFormat df = new SimpleDateFormat("MMMM dd, yyyy", new Locale("en"));
         return df.format(getDate());
+    }
+
+    public boolean isLikedUser(User user){
+        for(String likedUserId : likedUsersId){
+            if(likedUserId.equals(user.getId())){
+                return true;
+            }
+        }
+        return false;
     }
 }

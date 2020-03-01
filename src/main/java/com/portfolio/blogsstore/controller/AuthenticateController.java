@@ -2,7 +2,7 @@ package com.portfolio.blogsstore.controller;
 
 import com.portfolio.blogsstore.domain.User;
 import com.portfolio.blogsstore.service.UserService;
-import com.portfolio.blogsstore.validator.UserValidator;
+import com.portfolio.blogsstore.validator.UserRegisterValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +19,9 @@ public class AuthenticateController {
 
     private final UserService userService;
 
-    private final UserValidator userValidator;
+    private final UserRegisterValidator userValidator;
 
-    public AuthenticateController(UserService userService, UserValidator userValidator) {
+    public AuthenticateController(UserService userService, UserRegisterValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
     }
@@ -34,7 +34,7 @@ public class AuthenticateController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
+        //userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {

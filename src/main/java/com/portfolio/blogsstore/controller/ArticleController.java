@@ -5,6 +5,7 @@ import com.portfolio.blogsstore.domain.User;
 import com.portfolio.blogsstore.service.ArticleService;
 import com.portfolio.blogsstore.service.ImageService;
 import com.portfolio.blogsstore.service.UserService;
+import com.portfolio.blogsstore.validator.ArticleValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,11 +25,13 @@ public class ArticleController {
     private final ArticleService articleService;
     private final UserService userService;
     private final ImageService imageService;
+    private final ArticleValidator articleValidator;
 
-    public ArticleController(ArticleService articleService, UserService userService, ImageService imageService) {
+    public ArticleController(ArticleService articleService, UserService userService, ImageService imageService, ArticleValidator articleValidator) {
         this.articleService = articleService;
         this.userService = userService;
         this.imageService = imageService;
+        this.articleValidator = articleValidator;
     }
 
     @GetMapping("/user_articles")
@@ -47,11 +51,11 @@ public class ArticleController {
 
     @PostMapping("/article/create")
     public String create(@AuthenticationPrincipal User user,
-                         @ModelAttribute("article") Article article,
+                         @ModelAttribute("article") @Valid Article article,
                          @RequestParam("file") MultipartFile image,
                          BindingResult result) {
-        //todo:validate article form
-        imageService.saveImageFile(article,image);
+
+        articleValidator.validate(article,result);
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
@@ -59,6 +63,7 @@ public class ArticleController {
 
             return "article/form";
         }
+        imageService.saveImageFile(article,image);
         user.getArticles().add(article);
         article.setAuthor(user);
         articleService.save(article);

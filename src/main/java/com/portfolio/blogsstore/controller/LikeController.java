@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
+/*
+The controller is responsible for liking articles.
+ */
 @Slf4j
 @Controller
 public class LikeController {
@@ -19,7 +23,7 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-
+    //likes article and returns article index page
     @GetMapping("article/{articleId}/like")
     public String like(@AuthenticationPrincipal User user,
                        @PathVariable("articleId") Article article){

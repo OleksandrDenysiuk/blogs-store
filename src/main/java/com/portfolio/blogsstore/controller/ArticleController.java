@@ -18,6 +18,11 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/*
+The controller is responsible for processing requests related to articles.
+ */
+
 @Slf4j
 @Controller
 public class ArticleController {
@@ -34,6 +39,7 @@ public class ArticleController {
         this.articleValidator = articleValidator;
     }
 
+    //the method is responsible for covering all publications of the authenticated user
     @GetMapping("/user_articles")
     public String list(@AuthenticationPrincipal User user,
                        Model model) {
@@ -41,7 +47,7 @@ public class ArticleController {
         return "article/list";
     }
 
-
+    //method show the form for creating a new article
     @GetMapping("/article/create")
     public String showForm(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("article", new Article());
@@ -49,6 +55,7 @@ public class ArticleController {
         return "article/form";
     }
 
+    //method creates a new article and returns a list of all articles
     @PostMapping("/article/create")
     public String create(@AuthenticationPrincipal User user,
                          @ModelAttribute("article") @Valid Article article,
@@ -71,6 +78,7 @@ public class ArticleController {
         return "redirect:/user_articles";
     }
 
+    //method show all information of article
     @GetMapping("article/read/{articleId}")
     public String showContent(@AuthenticationPrincipal User user,
                               @PathVariable("articleId") Article article,
@@ -80,6 +88,7 @@ public class ArticleController {
         return "article/index";
     }
 
+    //method delete article
     @GetMapping("article/delete/{articleId}")
     public String delete(@AuthenticationPrincipal User user,
                          @PathVariable("articleId") Article article) {

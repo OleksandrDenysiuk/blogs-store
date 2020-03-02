@@ -8,6 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
+/*
+The controller is responsible for subscribing on users.
+ */
 @Slf4j
 @Controller
 public class SubscribeController {
@@ -18,6 +22,8 @@ public class SubscribeController {
         this.userService = userService;
     }
 
+
+    //subscribe on user
     @GetMapping("/user/{userId}/subscribe")
     public String subscribe(@AuthenticationPrincipal User subscriber,
                             @PathVariable("userId") User user){
@@ -31,6 +37,7 @@ public class SubscribeController {
       return "redirect:/user/{userId}";
     }
 
+    //unsubscribe on user
     @GetMapping("/user/{userId}/unsubscribe")
     public String unsubscribe(@AuthenticationPrincipal User subscriber,
                             @PathVariable("userId") User user){

@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService{
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    //creates and saves new user
     @Override
     public User save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    //updates user profile
     @Override
     public User updateProfile(User oldUser, User form) {
 
@@ -58,23 +60,27 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(oldUser);
     }
 
+    //adds new user to list of subscribers
     @Override
     public void subscribe(User subscriber, User user) {
         user.getSubscribers().add(subscriber);
         userRepository.save(user);
     }
 
+    //deletes user from list of subscribers
     @Override
     public void unsubscribe(User subscriber, User user) {
         user.getSubscribers().remove(subscriber);
         userRepository.save(user);
     }
 
+    //returns user by username
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    //updates user
     @Override
     public User update(User user) {
         return userRepository.save(user);

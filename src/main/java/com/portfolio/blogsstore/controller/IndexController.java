@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/*
+The controller is responsible for showing main page.
+ */
 @Controller
 public class IndexController {
 
@@ -16,6 +19,7 @@ public class IndexController {
         this.articleService = articleService;
     }
 
+    //show main page
     @GetMapping("/")
     public String show(@AuthenticationPrincipal User user, Model model){
         model.addAttribute("user", user);

@@ -22,6 +22,7 @@ public class UserRegisterValidator implements Validator {
         return User.class.equals(aClass);
     }
 
+    //checks registration form
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;

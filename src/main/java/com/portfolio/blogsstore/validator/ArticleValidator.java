@@ -13,6 +13,7 @@ public class ArticleValidator implements Validator {
         return Article.class.equals(aClass);
     }
 
+    //checks article form
     @Override
     public void validate(Object target, Errors errors) {
         Article article = (Article) target;

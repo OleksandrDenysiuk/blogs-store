@@ -13,19 +13,25 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/*
+The controller is responsible for rendering image.
+ */
 @Controller
 public class ImageController {
 
+    //render image for article
     @GetMapping("article/{id}/image")
     public void renderImageArticleFromDB(@PathVariable("id") Article article, HttpServletResponse response) throws IOException {
 
         renderImage(response, article.getImage());
     }
 
+    //render image for user profile
     @GetMapping("user/{id}/image")
     public void renderImageProfileFromDB(@PathVariable("id") User user, HttpServletResponse response) throws IOException {
         renderImage(response, user.getImage());
     }
+
 
     private void renderImage(HttpServletResponse response, Byte[] image) throws IOException {
         if (image != null) {

@@ -6,7 +6,6 @@ import com.portfolio.blogsstore.repository.ArticleRepository;
 import com.portfolio.blogsstore.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,9 +22,8 @@ public class ImageServiceImpl implements ImageService {
         this.userRepository = userRepository;
     }
 
-
+    //sets image for article and save it
     @Override
-    @Transactional
     public void saveImageFile(Article article, MultipartFile file) {
 
         try {
@@ -46,6 +44,7 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
+    //sets image for user and save it
     @Override
     public void saveImageFile(User user, MultipartFile file) {
         try {

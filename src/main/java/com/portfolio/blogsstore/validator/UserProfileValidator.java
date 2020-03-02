@@ -23,6 +23,7 @@ public class UserProfileValidator implements Validator {
         return User.class.equals(aClass);
     }
 
+    //checks user profile form
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;

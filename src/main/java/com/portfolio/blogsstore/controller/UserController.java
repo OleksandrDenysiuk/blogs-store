@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
-
+/*
+The controller is responsible for processing requests related to user.
+ */
 @Slf4j
 @Controller
 public class UserController {
@@ -29,6 +31,7 @@ public class UserController {
         this.imageService = imageService;
     }
 
+    //show profile of user by id
     @GetMapping("/user/{userId}")
     public String showUser(@AuthenticationPrincipal User user,
                            @PathVariable("userId") User userProfile,
@@ -39,6 +42,7 @@ public class UserController {
         return "user/index";
     }
 
+    //show profile of authenticated user and form for editing user it
     @GetMapping("/user")
     public String showMyProfile(@AuthenticationPrincipal User user,
                                 Model model) {
@@ -47,6 +51,7 @@ public class UserController {
         return "user/form";
     }
 
+    //validate user profile form and edit data of user
     @PostMapping("/user/edit")
     public String editProfile(@AuthenticationPrincipal User user,
                               @ModelAttribute("userForm") @Valid User form,
@@ -66,6 +71,7 @@ public class UserController {
         return "redirect:/user";
     }
 
+    //setting new image for user profile
     @PostMapping("/user/image")
     public String setImage(@AuthenticationPrincipal User user,
                            @RequestParam("image") MultipartFile image){

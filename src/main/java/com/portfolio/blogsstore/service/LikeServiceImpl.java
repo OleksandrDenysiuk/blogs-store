@@ -14,6 +14,7 @@ public class LikeServiceImpl implements LikeService{
         this.articleRepository = articleRepository;
     }
 
+    //adds new user to list of users which liked article
     @Override
     public void like(User user, Article article) {
         article.getLikedUsersId().add(user.getId());

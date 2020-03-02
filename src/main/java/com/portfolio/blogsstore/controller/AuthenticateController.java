@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+
+/*
+The controller is responsible for user authentication.
+ */
 @Slf4j
 @Controller
 public class AuthenticateController {
@@ -26,15 +30,17 @@ public class AuthenticateController {
         this.userValidator = userValidator;
     }
 
+    //method show registration form
     @GetMapping("/registration")
     public String showRegistrationForm(Model model){
         model.addAttribute("userForm",new User());
         return "authenticate/registration/form";
     }
 
+    //method validate form and create new user. Returns main page.
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
-        //userValidator.validate(userForm, bindingResult);
+        userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
